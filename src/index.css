@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Lora", ui-serif, Georgia, serif;
+
+  /* Sophisticated Brand Colors */
+  --color-primary: #b43304; /* The signature rust/orange */
+  --color-primary-dark: #8b2703;
+  --color-charcoal: #1a1a1a;
+  --color-cream: #f9f6f0;
+  --color-stone: #fdfbfa;
+  --color-heritage-gold: #d4a017;
+  --color-clay: #f4eee0;
+  --color-accent-green: #0a4a2e;
+  
+  --shadow-warm: 0 40px 80px -20px rgba(180, 51, 4, 0.2);
+  --shadow-soft: 0 10px 40px -5px rgba(26, 26, 26, 0.05);
+}
+
+@layer base {
+  body {
+    @apply bg-cream text-charcoal font-sans antialiased text-[18px] leading-[1.6] selection:bg-primary/20;
+    background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png");
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .bg-primary-gradient {
+    background: linear-gradient(135deg, #b43304 0%, #d94c3d 100%);
+  }
+  .bg-gold-gradient {
+    background: linear-gradient(135deg, #b43304 0%, #8b2703 100%);
+  }
+}
