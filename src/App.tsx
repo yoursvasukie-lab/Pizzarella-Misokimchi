@@ -549,11 +549,11 @@ export default function App() {
               <span className="w-20 h-[1.5px] bg-primary/40" />
               Est. in Cameron Highlands
             </p>
-            <h1 className="text-9xl md:text-[11rem] lg:text-[13rem] font-serif text-charcoal leading-[0.75] mb-14 drop-shadow-2xl">
+            <h1 className="text-6xl sm:text-7xl md:text-9xl font-serif text-charcoal leading-[1.0] mb-14 drop-shadow-2xl">
               Elevated <br />
               <span className="italic text-primary drop-shadow-lg">Flavours.</span>
             </h1>
-            <p className="text-charcoal/70 text-3xl md:text-4xl max-w-3xl mb-20 leading-tight font-light">
+            <p className="text-charcoal/70 text-2xl sm:text-3xl md:text-4xl max-w-3xl mb-12 sm:mb-20 leading-tight font-light">
               Made from scratch. <span className="text-charcoal font-semibold italic underline decoration-primary decoration-4 underline-offset-[12px]">No MSG.</span> <br />
               Halal-focused group catering.
             </p>
@@ -637,7 +637,7 @@ export default function App() {
             <div className="relative">
               <div className="aspect-[4/5] rounded-[40px] overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1511795409834-432f7b1728da?auto=format&fit=crop&q=80&w=1200" 
+                  src="/src/assets/images/regenerated_image_1778120474769.jpg" 
                   alt="Catering Setup" 
                   className="w-full h-full object-cover"
                 />
@@ -679,14 +679,14 @@ export default function App() {
             <div className="space-y-8">
               <h3 className="font-serif text-3xl italic text-primary border-b border-primary/20 pb-4">Breakfast Sets</h3>
               {MENU_PACKAGES.breakfast.map((pkg, i) => (
-                <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-charcoal/5">
+                <div key={i} className="bg-white p-8 rounded-3xl shadow-sm border border-charcoal/5 font-size-[17px]">
                   <div className="flex justify-between items-start mb-6">
                     <h4 className="font-serif text-2xl leading-tight">{pkg.name}</h4>
                     <span className="bg-cream px-4 py-2 rounded-full text-sm font-bold text-primary whitespace-nowrap">{pkg.price}</span>
                   </div>
                   <ul className="space-y-4">
                     {pkg.items.map((item, j) => (
-                      <li key={j} className="text-sm text-charcoal/60 flex gap-3">
+                      <li key={j} className="text-[17px] text-charcoal/60 flex gap-3">
                         <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" /> {item}
                       </li>
                     ))}
@@ -705,9 +705,9 @@ export default function App() {
                     <h4 className="font-serif text-3xl leading-tight pr-4">{pkg.name}</h4>
                     <span className={`${pkg.highlight ? 'bg-primary-gradient' : 'bg-gold-gradient'} px-4 py-2 rounded-2xl text-sm font-bold text-white whitespace-nowrap shadow-md`}>{pkg.price}</span>
                   </div>
-                  <ul className="space-y-5">
+                  <ul className="space-y-5 text-[16px]">
                     {pkg.items.map((item, j) => (
-                      <li key={j} className={`text-xl flex gap-4 ${pkg.highlight ? 'text-white/80' : 'text-charcoal/60'}`}>
+                      <li key={j} className={`flex gap-4 ${j === 0 ? 'text-[17px]' : ''} ${pkg.highlight ? 'text-white/80' : 'text-charcoal/60'}`}>
                         <div className="bg-primary/20 rounded-full p-1.5 h-fit shrink-0">
                           <Sparkles className="w-4 h-4 text-accent-gold" />
                         </div>
@@ -760,10 +760,10 @@ export default function App() {
               <span className="w-12 h-[2px] bg-primary/40 rounded-full" />
               The Pantry
             </p>
-            <h2 className="text-7xl md:text-9xl font-serif text-charcoal leading-[0.9] max-w-4xl italic mb-8">
+            <h2 className="text-5xl md:text-9xl font-serif text-charcoal leading-[0.9] max-w-4xl italic mb-8">
               Mix and match to your heart's content.
             </h2>
-            <p className="text-charcoal/60 text-2xl font-light max-w-2xl border-l-4 border-primary pl-8 py-2">
+            <p className="text-charcoal/60 text-xl md:text-2xl font-light max-w-2xl border-l-4 border-primary pl-8 py-2">
               You may choose from these premium selections to build your custom event menu. 
               Fusing local tradition with international flair.
             </p>
@@ -781,7 +781,7 @@ export default function App() {
                 </h4>
                 <ul className="space-y-4">
                   {cat.items.map((item, j) => (
-                    <li key={j} className="text-xl text-charcoal/70 font-medium hover:text-primary transition-colors cursor-default">
+                    <li key={j} className="text-lg md:text-xl text-charcoal/70 font-medium hover:text-primary transition-colors cursor-default">
                       {item}
                     </li>
                   ))}
@@ -810,7 +810,7 @@ export default function App() {
             <div className="relative">
               <div className="aspect-square rounded-[60px] overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1544411047-c49158422e3b?auto=format&fit=crop&q=80&w=1200" 
+                  src="/src/assets/images/regenerated_image_1778065881926.png" 
                   alt="Bento Box Delivery" 
                   className="w-full h-full object-cover"
                 />
@@ -906,9 +906,9 @@ export default function App() {
                 </div>
                 <h3 className="font-serif text-4xl mb-6 group-hover:text-primary transition-colors italic">{item.title}</h3>
                 <p className="text-charcoal/60 text-xl leading-relaxed mb-10">{item.description}</p>
-                <span className="text-primary text-sm font-black uppercase tracking-[0.3em] flex items-center gap-3 group-hover:gap-6 transition-all">
+                <a href="#menu" className="text-primary text-sm font-black uppercase tracking-[0.3em] flex items-center gap-3 group-hover:gap-6 transition-all">
                   Explore Package <ArrowRight className="w-6 h-6 shadow-sm" />
-                </span>
+                </a>
               </motion.div>
             ))}
           </div>
