@@ -67,39 +67,76 @@ const RECENT_EVENTS = [
   {
     title: 'Signature Buffet Styling',
     location: 'Cameron Highlands',
-    image: 'https://i.ibb.co/spdpQKtP/IMG-0045.jpg',
+    image: 'https://i.ibb.co/hJCxYnRm/IMG-0447.jpg',
     tag: 'Latest Event'
   },
   {
     title: 'Heritage Spread',
     location: 'Cameron Highlands',
-    image: 'https://i.ibb.co/CTbsmpJ/IMG-20260501-WA0023.jpg',
+    image: 'https://i.ibb.co/9kzQjxD8/IMG-0445.jpg',
     tag: 'Buffet'
   },
   {
     title: 'Event Excellence',
     location: 'Cameron Highlands',
-    image: 'https://i.ibb.co/DD5Mv7MP/IMG-20260501-WA0022.jpg',
+    image: 'https://i.ibb.co/4RtDGjQw/IMG-0443.jpg',
     tag: 'Setup'
   },
   {
     title: 'Fusion Delights',
     location: 'Cameron Highlands',
-    image: 'https://i.ibb.co/QjxJKDN6/IMG-20260501-WA0021.jpg',
+    image: 'https://i.ibb.co/sJPckLS0/IMG-0442.jpg',
     tag: 'Asian-Western'
   },
   {
     title: 'Platter Perfection',
     location: 'Cameron Highlands',
-    image: 'https://i.ibb.co/fGLp2Kwx/IMG-20260501-WA0011.jpg',
+    image: 'https://i.ibb.co/dZrYXN2/IMG-0441.jpg',
     tag: 'Set Menu'
   },
   {
     title: 'Professional Service',
     location: 'Cameron Highlands',
-    image: 'https://i.ibb.co/6fLmb51/Whats-App-Image-2026-03-24-at-16-39-33.jpg',
+    image: 'https://i.ibb.co/ksLDSHMD/IMG-0436.jpg',
     tag: 'Corporate'
   }
+];
+
+const EXTENDED_GALLERY = [
+  'https://i.ibb.co/TxtDGFxP/IMG-0435.jpg',
+  'https://i.ibb.co/847rVyT5/IMG-0432.jpg',
+  'https://i.ibb.co/pBM05Y3b/IMG-0420.jpg',
+  'https://i.ibb.co/xtv8BswC/IMG-0418.jpg',
+  'https://i.ibb.co/7tcccDLs/IMG-0406.jpg',
+  'https://i.ibb.co/cd6npr7/IMG-0389.jpg',
+  'https://i.ibb.co/DfCv3tyc/IMG-0384.jpg',
+  'https://i.ibb.co/22Vyyp3/IMG-0379.jpg',
+  'https://i.ibb.co/xSDNkwwQ/IMG-0374.jpg',
+  'https://i.ibb.co/393pVfgh/IMG-0372.jpg',
+  'https://i.ibb.co/tw38DQSn/IMG-0345.jpg',
+  'https://i.ibb.co/DPd1Rg79/IMG-0342.jpg',
+  'https://i.ibb.co/ksVVy5pf/IMG-0338.jpg',
+  'https://i.ibb.co/21Nrm0Qj/IMG-0311.jpg',
+  'https://i.ibb.co/ZpFFrGXv/IMG-0310.jpg',
+  'https://i.ibb.co/rRkfwQQ3/IMG-0309.jpg',
+  'https://i.ibb.co/Y4XYDq4V/IMG-0304.jpg',
+  'https://i.ibb.co/G4dwMgpM/IMG-0300.jpg',
+  'https://i.ibb.co/G3dFWWcn/IMG-0297.jpg',
+  'https://i.ibb.co/vvQwM3WG/IMG-0296.jpg',
+  'https://i.ibb.co/fGPkmjDP/IMG-0290.jpg',
+  'https://i.ibb.co/HTz14ghf/IMG-0289.jpg',
+  'https://i.ibb.co/jPF1rdZn/IMG-0269.jpg',
+  'https://i.ibb.co/yn3f9HTP/IMG-0248.jpg',
+  'https://i.ibb.co/1YYy6xHj/IMG-0237.jpg',
+  'https://i.ibb.co/zWSFMC8K/IMG-0222.jpg',
+  'https://i.ibb.co/nNb6hd7x/IMG-0207.jpg',
+  'https://i.ibb.co/r2vVBJG1/IMG-0188.jpg',
+  'https://i.ibb.co/3YRWfqn6/IMG-0187.jpg',
+  'https://i.ibb.co/LdzWBv0r/IMG-0186.jpg',
+  'https://i.ibb.co/jkp794mw/IMG-0185.jpg',
+  'https://i.ibb.co/1f9WQxwZ/IMG-0122.jpg',
+  'https://i.ibb.co/pr2fHzhR/IMG-0085.jpg',
+  'https://i.ibb.co/jZjrb1pB/IMG-0082.jpg'
 ];
 
 const FEATURES = [
@@ -314,34 +351,88 @@ const MENU_LIBRARY = [
 // --- Components ---
 
 const ImageGallery = () => {
+  const [showAll, setShowAll] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
+  const allImages = [
+    ...RECENT_EVENTS.map(e => ({ url: e.image })),
+    ...EXTENDED_GALLERY.map(url => ({ url }))
+  ];
+
+  const displayedImages = showAll ? allImages : allImages.slice(0, 8);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-      {RECENT_EVENTS.map((event, i) => (
-        <motion.div 
-          key={i}
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          transition={{ delay: i * 0.1 }}
-          className="group relative h-[400px] rounded-[32px] overflow-hidden cursor-pointer shadow-soft hover:shadow-warm transition-all duration-500"
-        >
-          <img 
-            src={event.image} 
-            alt={event.title} 
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
-          <div className="absolute bottom-0 left-0 p-8 w-full transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-            <span className="inline-block bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full mb-3 shadow-md">
-              {event.tag}
-            </span>
-            <h4 className="text-white font-serif text-xl mb-1">{event.title}</h4>
-            <p className="text-white/60 text-xs flex items-center gap-1 uppercase tracking-widest">
-              <Truck className="w-3 h-3 text-accent-gold" /> {event.location}
-            </p>
-          </div>
-        </motion.div>
-      ))}
-    </div>
+    <>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {displayedImages.map((event, i) => (
+          <motion.div 
+            key={i}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ delay: (i % 8) * 0.05 }}
+            viewport={{ once: true }}
+            onClick={() => setSelectedImage(event.url)}
+            className="group relative h-[400px] rounded-[32px] overflow-hidden cursor-pointer shadow-soft hover:shadow-warm transition-all duration-500"
+          >
+            <img 
+              src={event.url} 
+              alt="Event Highlight" 
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+            />
+            <div className="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/20 transition-all duration-500 flex items-center justify-center">
+              <Sparkles className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-all duration-500 scale-50 group-hover:scale-100" />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-16 flex justify-center">
+        {!showAll ? (
+          <button 
+            onClick={() => setShowAll(true)}
+            className="bg-white border-2 border-primary text-primary px-12 py-5 rounded-full text-sm font-black uppercase tracking-widest hover:bg-primary hover:text-white transition-all shadow-lg flex items-center gap-3 group"
+          >
+            View More Event Photos <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </button>
+        ) : (
+          <button 
+            onClick={() => setShowAll(false)}
+            className="bg-white border-2 border-charcoal/10 text-charcoal/40 px-12 py-5 rounded-full text-sm font-black uppercase tracking-widest hover:text-charcoal transition-all"
+          >
+            Show Less
+          </button>
+        )}
+      </div>
+
+      {/* Lightbox / Modal */}
+      <AnimatePresence>
+        {selectedImage && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImage(null)}
+            className="fixed inset-0 z-[100] bg-charcoal/95 backdrop-blur-md p-6 md:p-12 flex items-center justify-center cursor-zoom-out"
+          >
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"
+            >
+              <X className="w-10 h-10" />
+            </button>
+            <motion.img 
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              src={selectedImage} 
+              className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain"
+              alt="Event Large Preview"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
@@ -520,6 +611,31 @@ const EventQuiz = () => {
 };
 
 export default function App() {
+  const [selectedItems, setSelectedItems] = useState<Record<string, string[]>>({});
+
+  const toggleItem = (category: string, item: string) => {
+    setSelectedItems(prev => {
+      const current = prev[category] || [];
+      if (current.includes(item)) {
+        return { ...prev, [category]: current.filter(i => i !== item) };
+      }
+      return { ...prev, [category]: [...current, item] };
+    });
+  };
+
+  const getWhatsAppMessage = () => {
+    let message = "Hi Pizzarella! I'd like to inquire about a custom Mix & Match menu:\n\n";
+    (Object.entries(selectedItems) as [string, string[]][]).forEach(([cat, items]) => {
+      if (items.length > 0) {
+        message += `*${cat}:*\n- ${items.join('\n- ')}\n\n`;
+      }
+    });
+    message += "Can you provide a price quote for this selection?";
+    return encodeURIComponent(message);
+  };
+
+  const totalSelected = Object.values(selectedItems).flat().length;
+
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -539,41 +655,67 @@ export default function App() {
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
-          <motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl"
-          >
-            <p className="text-primary uppercase tracking-[0.6em] font-black text-sm mb-14 flex items-center gap-6">
-              <span className="w-20 h-[1.5px] bg-primary/40" />
-              Est. in Cameron Highlands
-            </p>
-            <h1 className="text-6xl sm:text-7xl md:text-9xl font-serif text-charcoal leading-[1.0] mb-14 drop-shadow-2xl">
-              Elevated <br />
-              <span className="italic text-primary drop-shadow-lg">Flavours.</span>
-            </h1>
-            <p className="text-charcoal/70 text-2xl sm:text-3xl md:text-4xl max-w-3xl mb-12 sm:mb-20 leading-tight font-light">
-              Made from scratch. <span className="text-charcoal font-semibold italic underline decoration-primary decoration-4 underline-offset-[12px]">No MSG.</span> <br />
-              Halal-focused group catering.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6">
-              <a 
-                href={WHATSAPP_LINK}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-primary text-white px-12 py-7 rounded-full text-sm font-bold uppercase tracking-widest hover:scale-105 hover:shadow-warm transition-all flex items-center justify-center gap-3"
-              >
-                Inquire via WhatsApp <ArrowRight className="w-5 h-5" />
-              </a>
-              <a 
-                href="#menu" 
-                className="group border border-charcoal/10 bg-white shadow-soft text-charcoal px-12 py-7 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-charcoal hover:text-white transition-all text-center flex items-center justify-center gap-2"
-              >
-                View Packages <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
-            </div>
-          </motion.div>
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <motion.div 
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="max-w-4xl"
+            >
+              <p className="text-primary uppercase tracking-[0.3em] font-black text-[18px] md:text-[26px] mb-10 flex items-center gap-6">
+                <span className="w-12 h-[2.5px] bg-primary/60" />
+                Est. in Cameron Highlands
+              </p>
+              <h1 className="text-7xl md:text-[136px] font-serif text-charcoal leading-[1.1] md:leading-[165px] mb-14 drop-shadow-2xl">
+                Elevated <br />
+                <span className="italic text-primary drop-shadow-lg">Flavours.</span>
+              </h1>
+              <p className="text-charcoal/70 text-xl sm:text-2xl md:text-3xl max-w-2xl mb-12 sm:mb-16 leading-tight font-light">
+                Made from scratch. <span className="text-charcoal font-semibold italic underline decoration-primary decoration-4 underline-offset-[12px]">No MSG.</span> <br />
+                Halal-focused premium catering.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-6">
+                <a 
+                  href={WHATSAPP_LINK}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="bg-primary text-white px-10 py-6 rounded-full text-sm font-bold uppercase tracking-widest hover:scale-105 hover:shadow-warm transition-all flex items-center justify-center gap-3"
+                >
+                  Book Your Event <ArrowRight className="w-5 h-5" />
+                </a>
+                <a 
+                  href="#menu" 
+                  className="group border border-charcoal/10 bg-white/50 backdrop-blur-md shadow-soft text-charcoal px-10 py-6 rounded-full text-sm font-bold uppercase tracking-widest hover:bg-charcoal hover:text-white transition-all text-center flex items-center justify-center gap-2"
+                >
+                  Explore Menus <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.2 }}
+              className="hidden lg:grid grid-cols-2 gap-4 h-[600px]"
+            >
+              <div className="space-y-4 pt-12">
+                <div className="h-2/3 rounded-3xl overflow-hidden shadow-2xl">
+                  <img src="https://i.ibb.co/hJCxYnRm/IMG-0447.jpg" className="w-full h-full object-cover" alt="Event setup" />
+                </div>
+                <div className="h-1/3 rounded-3xl overflow-hidden shadow-xl">
+                  <img src="https://i.ibb.co/9kzQjxD8/IMG-0445.jpg" className="w-full h-full object-cover" alt="Dish detail" />
+                </div>
+              </div>
+              <div className="space-y-4">
+                <div className="h-1/3 rounded-3xl overflow-hidden shadow-xl">
+                  <img src="https://i.ibb.co/4RtDGjQw/IMG-0443.jpg" className="w-full h-full object-cover" alt="Setup close-up" />
+                </div>
+                <div className="h-2/3 rounded-3xl overflow-hidden shadow-2xl">
+                  <img src="https://i.ibb.co/sJPckLS0/IMG-0442.jpg" className="w-full h-full object-cover" alt="Main spread" />
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
@@ -768,29 +910,81 @@ export default function App() {
               Fusing local tradition with international flair.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 md:gap-12">
             {MENU_LIBRARY.map((cat, i) => (
               <motion.div 
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
               >
-                <h4 className="font-bold text-[10px] uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
-                  <span className="w-4 h-[1px] bg-primary" /> {cat.category}
+                <h4 className="font-black text-[12px] uppercase tracking-[0.2em] text-primary mb-8 flex items-center gap-3">
+                  <span className="w-6 h-[2px] bg-primary/30" /> {cat.category}
                 </h4>
-                <ul className="space-y-4">
-                  {cat.items.map((item, j) => (
-                    <li key={j} className="text-lg md:text-xl text-charcoal/70 font-medium hover:text-primary transition-colors cursor-default">
-                      {item}
-                    </li>
-                  ))}
+                <ul className="space-y-3">
+                  {cat.items.map((item, j) => {
+                    const isSelected = selectedItems[cat.category]?.includes(item);
+                    return (
+                      <li 
+                        key={j} 
+                        onClick={() => toggleItem(cat.category, item)}
+                        className={`group flex items-center gap-3 p-3 rounded-2xl cursor-pointer transition-all duration-300 border-2 ${
+                          isSelected 
+                            ? 'bg-primary/10 border-primary text-primary shadow-sm' 
+                            : 'bg-white/40 border-transparent text-charcoal/70 hover:bg-white hover:border-charcoal/10'
+                        }`}
+                      >
+                        <div className={`w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all ${
+                          isSelected ? 'bg-primary border-primary' : 'border-charcoal/20 group-hover:border-primary/40'
+                        }`}>
+                          {isSelected && <Check className="w-3 h-3 text-white" />}
+                        </div>
+                        <span className={`text-base font-medium leading-tight ${isSelected ? 'font-bold' : ''}`}>
+                          {item}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </motion.div>
             ))}
           </div>
           
-          <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-8 p-10 bg-cream rounded-[40px] border border-charcoal/5">
+          <AnimatePresence>
+            {totalSelected > 0 && (
+              <motion.div 
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 40 }}
+                className="mt-20 flex flex-col md:flex-row items-center justify-between gap-8 p-10 md:p-12 bg-white rounded-[48px] border-2 border-primary shadow-warm relative z-20"
+              >
+                <div className="flex-grow">
+                  <span className="inline-block bg-primary/10 text-primary text-[10px] font-black uppercase tracking-widest px-4 py-2 rounded-full mb-4">Your Custom Selection</span>
+                  <h4 className="font-serif text-4xl mb-3 text-charcoal">Get your personalized price.</h4>
+                  <p className="text-charcoal/50 text-xl">You've selected <span className="text-primary font-bold">{totalSelected} items</span> for your dream menu.</p>
+                </div>
+                <div className="flex flex-col sm:flex-row gap-4 w-full md:w-auto">
+                  <button 
+                    onClick={() => setSelectedItems({})}
+                    className="text-charcoal/40 text-xs font-bold uppercase tracking-widest hover:text-primary transition-colors px-6"
+                  >
+                    Clear All
+                  </button>
+                  <a 
+                    href={`${WHATSAPP_LINK}?text=${getWhatsAppMessage()}`} 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="bg-primary text-white px-12 py-6 rounded-full text-sm font-black uppercase tracking-widest hover:bg-charcoal hover:scale-105 transition-all text-center shadow-lg flex items-center justify-center gap-3"
+                  >
+                    Get Price & Book <ArrowRight className="w-5 h-5" />
+                  </a>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          <div className={`mt-20 flex flex-col md:flex-row items-center justify-between gap-8 p-10 bg-white/40 rounded-[40px] border border-charcoal/5 transition-opacity duration-500 ${totalSelected > 0 ? 'opacity-40 blur-[2px] pointer-events-none' : 'opacity-100'}`}>
             <div>
               <h4 className="font-serif text-3xl mb-2 text-charcoal">Don't see your favorite dish?</h4>
               <p className="text-charcoal/50 text-xl">We specialize in custom menu planning for weddings and corporate events.</p>
@@ -921,7 +1115,7 @@ export default function App() {
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-4">
             <SectionHeading 
               subtitle="Our Gallery"
-              title="Captured from our recent events."
+              title="Event Highlights"
             />
             <div className="mb-12 md:mb-16">
               <a href={WHATSAPP_LINK} className="font-bold text-xs uppercase tracking-widest text-primary hover:underline flex items-center gap-2">
